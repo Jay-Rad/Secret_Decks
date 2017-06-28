@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Secret_Decks.Windows"
         mc:Ignorable="d"
-         Title="About Secret Decks" Height="275" Width="325" Topmost="True" WindowStartupLocation="CenterOwner">
+         Title="About Secret Decks" Height="300" Width="325" Topmost="True" WindowStartupLocation="CenterOwner">
     <StackPanel Margin="10">
         <TextBlock Text="Secret Decks" Margin="0, 0, 0, 10" FontWeight="Bold" FontSize="15"/>
         <TextBlock Margin="0, 0, 0, 10">
@@ -17,7 +17,19 @@
             <Hyperlink Click="Hyperlink_Click">https://translucency.azurewebsites.net</Hyperlink>
             <TextBlock>)</TextBlock>
         </TextBlock>
-        <TextBox Height="80" Margin="0, 0, 0, 5" TextWrapping="Wrap" Text="Secret Decks is allows you to easily save and switch between ability and equipment load-outs (or decks) in Secret World Legends." IsReadOnly="True"/>
+        <Border BorderBrush="Gray" BorderThickness="1" Margin="0, 0, 0, 10" >
+            <TextBlock Height="120" TextWrapping="Wrap">
+                <Run>Secret Decks is allows you to easily save and switch between ability and equipment load-outs (or decks) in Secret World Legends.</Run>
+                <LineBreak></LineBreak>
+                <LineBreak></LineBreak>
+                <Run>Third Party Libraries: </Run>
+                <LineBreak></LineBreak>
+                <Run>Fody (https://github.com/Fody/Fody)</Run>
+                <LineBreak></LineBreak>
+                <Run>Costura (https://github.com/Fody/Costura)</Run>
+            </TextBlock>
+        </Border>
+        
         <Button Content="OK" HorizontalAlignment="Right" Width="60" Height="30" IsCancel="True" IsDefault="True"/>
     </StackPanel>
 </Window>
