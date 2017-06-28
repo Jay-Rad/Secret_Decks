@@ -1,4 +1,4 @@
-# Secret Decks
+ Secret Decks
 A deck manager for Secret World Legends.
 
 Secret Decks is not a true mod.  Instead, it uses .NET and native Windows functions to automate input into the game window and manage equipment/ability load-outs (known as "decks").
@@ -13,4 +13,4 @@ Secret Decks is not a true mod.  Instead, it uses .NET and native Windows functi
 * Click "Create" to save the deck.
 * To update a deck, select it in Secret Decks, change your deck in SWL, then click "Update."
 
-![Deck Manager for Secret World Legends](https://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
+![Deck Manager for Secret World Legends](http://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
