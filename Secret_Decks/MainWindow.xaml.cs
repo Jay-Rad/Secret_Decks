@@ -34,6 +34,10 @@ namespace Secret_Decks
             };
             App.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             InitializeComponent();
+            WPF_Auto_Update.Updater.RemoteFileURI = "https://translucency.azurewebsites.net/Downloads/" + WPF_Auto_Update.Updater.FileName;
+            WPF_Auto_Update.Updater.ServiceURI = "https://translucency.azurewebsites.net/Services/VersionCheck.cshtml?Path=/Downloads/" + WPF_Auto_Update.Updater.FileName;
+            WPF_Auto_Update.Updater.UpdateTimeout = Duration.Forever;
+            WPF_Auto_Update.Updater.CheckCommandLineArgs();
         }
 
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -48,8 +52,9 @@ namespace Secret_Decks
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             comboCharacters.Items.Refresh();
-            comboCharacters.SelectedItem = Settings.Current.SelectedCharacter;
-            comboCharacters.Text = Settings.Current.SelectedCharacter.Name;
+            comboCharacters.SelectedItem = Settings.Current?.SelectedCharacter;
+            comboCharacters.Text = Settings.Current?.SelectedCharacter?.Name;
+            WPF_Auto_Update.Updater.CheckForUpdates(true);
         }
         private void Window_Activated(object sender, EventArgs e)
         {
@@ -201,6 +206,18 @@ namespace Secret_Decks
             var win = new Help();
             win.Owner = this;
             win.ShowDialog();
+        }
+
+        private void menuCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            if (menuCharacter.IsChecked)
+            {
+                gridCharacter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                gridCharacter.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
