@@ -6,19 +6,25 @@
         xmlns:local="clr-namespace:Secret_Decks"
         xmlns:Models="clr-namespace:Secret_Decks.Models" x:Class="Secret_Decks.MainWindow"
         mc:Ignorable="d"
-        Title="Secret Decks" Height="350" Width="350" Topmost="True" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Background="{x:Null}"  Loaded="Window_Loaded" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="Secret Decks" Height="350" Width="300" Topmost="True" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Background="{x:Null}"  Loaded="Window_Loaded" MouseLeftButtonDown="Window_MouseLeftButtonDown" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Window.DataContext>
         <Models:Settings/>
     </Window.DataContext>
-    <Border Background="#BF000000" CornerRadius="20" >
+    <Border x:Name="borderMain" Background="#BF000000" CornerRadius="20" >
         <Grid>
             <Button x:Name="buttonClose" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,10,10,0" Click="buttonClose_Click" Style="{DynamicResource TransparentButtonStyle}">
                 <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
                     <TextBlock Text="X" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
                 </Border>
             </Button>
-            <Button x:Name="buttonOptions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" Cursor="Hand" Style="{DynamicResource TransparentButtonStyle}" Margin="10,10,0,0">
+            <Button x:Name="buttonOptions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="25" Cursor="Hand" Style="{DynamicResource TransparentButtonStyle}" Margin="10,10,0,0" Click="buttonOptions_Click">
                 <Image Source="Assets/gear_32xLG.png"/>
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="menuHelp" Header="Help" Click="menuHelp_Click"></MenuItem>
+                        <MenuItem x:Name="menuAbout" Header="About" Click="menuAbout_Click"></MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
             </Button>
             <TextBlock Text="Character:"  HorizontalAlignment="Left" FontSize="15" Margin="10,60,0,0" Foreground="Wheat" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <ComboBox x:Name="comboCharacters" Margin="120,60,10,0" VerticalAlignment="Top" Background="#FF323232" IsEditable="True" ItemsSource="{Binding Current.Characters}" SelectedItem="{Binding Current.SelectedCharacter, Mode=TwoWay}" SelectionChanged="comboCharacters_SelectionChanged" />
@@ -33,8 +39,8 @@
                 </Border>
             </Button>
             <TextBlock Text="Decks:"  HorizontalAlignment="Left" FontSize="15" Margin="10,116,0,0" Foreground="Wheat" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <ListBox x:Name="listDecks" Margin="10,141,10,39" Background="#FF323232" ItemsSource="{Binding Current.SelectedCharacter.Decks}" Foreground="White" SelectionChanged="listDecks_SelectionChanged"/>
-            <Button x:Name="buttonAddDeck" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,80,10" Click="buttonAddDeck_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Create a new deck with your current loadout.">
+            <ListBox x:Name="listDecks" Margin="10,141,10,39" Background="#FF323232" ItemsSource="{Binding Current.SelectedCharacter.Decks}" Foreground="White" SelectionChanged="listDecks_SelectionChanged" FontSize="14"/>
+            <Button x:Name="buttonAddDeck" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,80,10" Click="buttonAddDeck_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Create a new deck with your current load-out.">
                 <Border CornerRadius="3" Height="20"  Width="50" Background="DimGray">
                     <TextBlock Text="Create" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Border>
@@ -44,7 +50,7 @@
                     <TextBlock Text="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Border>
             </Button>
-            <Button x:Name="buttonUpdateDeck" HorizontalAlignment="LEft" VerticalAlignment="Bottom" Cursor="Hand" Margin="10,0,0,10" Click="buttonUpdateDeck_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Update the selected deck with your current loadout.">
+            <Button x:Name="buttonUpdateDeck" HorizontalAlignment="LEft" VerticalAlignment="Bottom" Cursor="Hand" Margin="10,0,0,10" Click="buttonUpdateDeck_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Update the selected deck with your current load-out.">
                 <Border CornerRadius="3" Height="20"  Width="50" Background="DimGray">
                     <TextBlock Text="Update" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Border>

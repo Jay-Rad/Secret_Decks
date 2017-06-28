@@ -46,7 +46,7 @@ namespace Secret_Decks.Windows
             }
             if (Win32.User32.SetForegroundWindow(proc.MainWindowHandle))
             {
-                SendKeys.SendWait("~/gearmanager save SecretDecks" + textNewDeck.Text + "~");
+                SendKeys.SendWait("{DIVIDE}gearmanager save Secret_Decks_" + textNewDeck.Text + "{ENTER}");
             }
             Settings.Current.SelectedCharacter.Decks.Add(new Deck() { Name = textNewDeck.Text });
             Settings.Current.Save();

@@ -1,4 +1,5 @@
 ﻿using Secret_Decks.Models;
+using Secret_Decks.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -49,16 +51,27 @@ namespace Secret_Decks
             comboCharacters.SelectedItem = Settings.Current.SelectedCharacter;
             comboCharacters.Text = Settings.Current.SelectedCharacter.Name;
         }
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            var da = new DoubleAnimation(1, TimeSpan.FromSeconds(.5));
+            borderMain.BeginAnimation(Border.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
 
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            var da = new DoubleAnimation(.5, TimeSpan.FromSeconds(.5));
+            borderMain.BeginAnimation(Border.OpacityProperty, da);
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
 
         private async void buttonAddCharacter_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +118,12 @@ namespace Secret_Decks
 
         private void buttonAddDeck_Click(object sender, RoutedEventArgs e)
         {
-            var win = new Windows.NewDeck();
+            if (Settings.Current.SelectedCharacter == null)
+            {
+                MessageBox.Show("You must create or select a character first.", "Character Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var win = new NewDeck();
             win.Owner = this;
             win.ShowDialog();
             listDecks.Items.Refresh();
@@ -123,7 +141,7 @@ namespace Secret_Decks
 
         }
 
-        private void buttonUpdateDeck_Click(object sender, RoutedEventArgs e)
+        private async void buttonUpdateDeck_Click(object sender, RoutedEventArgs e)
         {
             if (listDecks.SelectedIndex == -1)
             {
@@ -138,12 +156,14 @@ namespace Secret_Decks
             }
             if (Win32.User32.SetForegroundWindow(proc.MainWindowHandle))
             {
-                System.Windows.Forms.SendKeys.SendWait("~/gearmanager save SecretDecks" + listDecks.SelectedItem.ToString() + "~");
+                System.Windows.Forms.SendKeys.SendWait("{DIVIDE}gearmanager save Secret_Decks_" + listDecks.SelectedItem.ToString());
+                await Task.Delay(10);
+                System.Windows.Forms.SendKeys.SendWait("{ENTER}");
             }
             Settings.Current.Save();
         }
 
-        private void listDecks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void listDecks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listDecks.SelectedItem == null)
             {
@@ -157,9 +177,30 @@ namespace Secret_Decks
             }
             if (Win32.User32.SetForegroundWindow(proc.MainWindowHandle))
             {
-                System.Windows.Forms.SendKeys.SendWait("~/gearmanager use SecretDecks" + listDecks.SelectedItem.ToString() + "~");
+                System.Windows.Forms.SendKeys.SendWait("{DIVIDE}gearmanager use Secret_Decks_" + listDecks.SelectedItem.ToString());
+                await Task.Delay(10);
+                System.Windows.Forms.SendKeys.SendWait("{ENTER}");
             }
             Settings.Current.Save();
+        }
+
+        private void buttonOptions_Click(object sender, RoutedEventArgs e)
+        {
+            buttonOptions.ContextMenu.IsOpen = !buttonOptions.ContextMenu.IsOpen;
+        }
+
+        private void menuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new About();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+        private void menuHelp_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new Help();
+            win.Owner = this;
+            win.ShowDialog();
         }
     }
 }

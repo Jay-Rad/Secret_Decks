@@ -1,0 +1,85 @@
+﻿<Window x:Class="Secret_Decks.Windows.Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Secret_Decks.Windows"
+        mc:Ignorable="d"
+        Title="Help" Height="400" Width="350"  Topmost="True" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Background="{x:Null}" WindowStartupLocation="CenterOwner" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border Background="#BF000000" CornerRadius="20" BorderBrush="Gray" BorderThickness="1" >
+        <Grid>
+            <TextBlock Text="How to Use Secret Decks" Foreground="Wheat" Margin="10,10,10,0" FontSize="20" TextAlignment="Center" VerticalAlignment="Top"></TextBlock>
+            <Button x:Name="buttonClose" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,10,10,0" Click="buttonClose_Click" Style="{DynamicResource TransparentButtonStyle}">
+                <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
+                    <TextBlock Text="X" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                </Border>
+            </Button>
+            <Ellipse Height="5" Margin="0,42,0,351">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="White" Offset="0"></GradientStop>
+                        <GradientStop Color="Transparent" Offset="1"></GradientStop>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <FlowDocumentScrollViewer Margin="0,70,0,0" VerticalScrollBarVisibility="Auto">
+                <FlowDocument Foreground="White" FontFamily="Segoe UI" FontSize="14">
+                    <Paragraph>
+                        <Run FontWeight="Bold">
+                            Requirements:
+                        </Run>
+                    </Paragraph>
+                    <List MarkerStyle="Disc">
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="Display mode must be set to 'Windowed (Borderless).'"/>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="'Activate command input' must be bound to 'numpad divide' (the '/' key above the numpad, which is the default binding)."/>
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                    <Paragraph>
+                        <Run FontWeight="Bold">
+                            Usage:
+                        </Run>
+                    </Paragraph>
+                    <List MarkerStyle="Disc">
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="Add a new character profile by clicking the '+' button."/>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="Equip the items and skills you want to save."/>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="Click 'Create' to save the deck."/>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="To update a deck, select it in Secret Decks, change your deck in SWL, then click 'Update.'"/>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem Margin="0,0,0,10">
+                            <Paragraph>
+                                <Run Text="Submit bugs or suggestions at the "/>
+                                <Hyperlink x:Name="hyperTranslucency" Click="hyperTranslucency_Click">Translucency website</Hyperlink>
+                                <Run Text=" or "></Run>
+                                <Hyperlink x:Name="hyperGithub" Click="hyperGithub_Click">GitHub page</Hyperlink>
+                                <Run Text="."></Run>
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </Grid>
+
+    </Border>
+</Window>

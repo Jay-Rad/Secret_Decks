@@ -1,0 +1,23 @@
+﻿<Window x:Class="Secret_Decks.Windows.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Secret_Decks.Windows"
+        mc:Ignorable="d"
+         Title="About Secret Decks" Height="275" Width="325" Topmost="True" WindowStartupLocation="CenterOwner">
+    <StackPanel Margin="10">
+        <TextBlock Text="Secret Decks" Margin="0, 0, 0, 10" FontWeight="Bold" FontSize="15"/>
+        <TextBlock Margin="0, 0, 0, 10">
+            <TextBlock Text="Version "></TextBlock>
+            <TextBlock Text="{Binding Version, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:About}}}"></TextBlock>
+        </TextBlock>
+        <TextBlock Margin="0, 0, 0, 10" >
+            <TextBlock>Translucency (</TextBlock>
+            <Hyperlink Click="Hyperlink_Click">https://translucency.azurewebsites.net</Hyperlink>
+            <TextBlock>)</TextBlock>
+        </TextBlock>
+        <TextBox Height="80" Margin="0, 0, 0, 5" TextWrapping="Wrap" Text="Secret Decks is allows you to easily save and switch between ability and equipment load-outs (or decks) in Secret World Legends." IsReadOnly="True"/>
+        <Button Content="OK" HorizontalAlignment="Right" Width="60" Height="30" IsCancel="True" IsDefault="True"/>
+    </StackPanel>
+</Window>
