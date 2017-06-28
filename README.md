@@ -10,7 +10,7 @@ Secret Decks is not a true mod.  Instead, it uses .NET and native Windows functi
 ### Usage:
 * Add a new character profile by clicking the "+" button.
 * In SWL, equip the items and skills you want to save.
-* Click "Create" to save the deck."
+* Click "Create" to save the deck.
 * To update a deck, select it in Secret Decks, change your deck in SWL, then click "Update."
 
-![Deck Manager for Secret World Legends](http://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
+![Deck Manager for Secret World Legends](https://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
