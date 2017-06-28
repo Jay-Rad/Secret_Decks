@@ -13,4 +13,4 @@ Secret Decks is not a true mod.  Instead, it uses .NET and native Windows functi
 * Click "Create" to save the deck."
 * To update a deck, select it in Secret Decks, change your deck in SWL, then click "Update."
 
-![A Deck Manager for Secret World Legends](https://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
+![Deck Manager for Secret World Legends](http://translucency.azurewebsites.net/Images/Screenshots/Secret_Decks.png)
