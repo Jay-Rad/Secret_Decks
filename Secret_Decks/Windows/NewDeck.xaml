@@ -10,7 +10,7 @@
         <Grid>
             <TextBlock Foreground="Wheat" Margin="10,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">New Deck Name:</TextBlock>
             <TextBox x:Name="textNewDeck" Height="23" Margin="129,50,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <Button x:Name="buttonOK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,80,48" Click="buttonOK_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Add Character">
+            <Button x:Name="buttonOK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,80,48" Click="buttonOK_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Add Character" IsDefault="True">
                 <Border CornerRadius="3" Height="20"  Width="50" Background="DimGray">
                     <TextBlock Text="OK" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Border>
