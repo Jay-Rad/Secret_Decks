@@ -25,7 +25,7 @@ namespace Secret_Decks.Windows
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var screen = System.Windows.Forms.Screen.FromPoint(System.Windows.Forms.Cursor.Current.HotSpot);
+            var screen = System.Windows.Forms.Screen.FromPoint(System.Windows.Forms.Cursor.Position);
             while (this.Left < screen.Bounds.Right - 50 || this.Top < screen.Bounds.Bottom - 50)
             {
                 if (this.Left < screen.Bounds.Right - 50)
