@@ -33,6 +33,11 @@ namespace Secret_Decks.Windows
                 System.Windows.MessageBox.Show("A deck name is required.", "Name Required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            if (textNewDeck.Text.Contains(" ") || textNewDeck.Text.Contains("-"))
+            {
+                System.Windows.MessageBox.Show("The deck name can't contain spaces or hyphens.  Use underscores instead.", "Invalid Character", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (Settings.Current.SelectedCharacter.Decks.Exists(deck=>deck.Name == textNewDeck.Text))
             {
                 System.Windows.MessageBox.Show("A deck with that name already exists.", "Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);

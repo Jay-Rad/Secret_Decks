@@ -134,11 +134,18 @@ namespace Secret_Decks
             listDecks.Items.Refresh();
         }
 
-        private void buttonDeleteDeck_Click(object sender, RoutedEventArgs e)
+        private async void buttonDeleteDeck_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to delete this deck?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
+                var proc = System.Diagnostics.Process.GetProcesses().ToList().Find(process => process.MainWindowTitle == "Secret World Legends");
+                if (Win32.User32.SetForegroundWindow(proc.MainWindowHandle))
+                {
+                    System.Windows.Forms.SendKeys.SendWait("{DIVIDE}gearmanager delete Secret_Decks_" + listDecks.SelectedItem.ToString());
+                    await Task.Delay(10);
+                    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+                }
                 Settings.Current.SelectedCharacter.Decks.Remove(listDecks.SelectedItem as Deck);
                 listDecks.Items.Refresh();
                 Settings.Current.Save();
