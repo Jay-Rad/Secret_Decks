@@ -34,8 +34,8 @@ namespace Secret_Decks
             };
             App.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             InitializeComponent();
-            WPF_Auto_Update.Updater.RemoteFileURI = "https://translucency.azurewebsites.net/Downloads/" + WPF_Auto_Update.Updater.FileName;
-            WPF_Auto_Update.Updater.ServiceURI = "https://translucency.azurewebsites.net/Services/VersionCheck.cshtml?Path=/Downloads/" + WPF_Auto_Update.Updater.FileName;
+            WPF_Auto_Update.Updater.RemoteFileURI = "https://translucency.azurewebsites.net/Downloads/Secret%20Decks.exe";
+            WPF_Auto_Update.Updater.ServiceURI = "https://translucency.azurewebsites.net/Services/VersionCheck.cshtml?Path=/Downloads/Secret%20Decks.exe";
             WPF_Auto_Update.Updater.UpdateTimeout = Duration.Forever;
             WPF_Auto_Update.Updater.CheckCommandLineArgs();
         }
