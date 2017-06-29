@@ -1,0 +1,26 @@
+﻿<Window x:Class="Secret_Decks.Windows.NewCharacter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Secret_Decks.Windows"
+        mc:Ignorable="d"
+        Title="New Character" Height="150" Width="350"  Topmost="True" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" WindowStartupLocation="CenterOwner" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border Background="#BF000000" CornerRadius="20" BorderBrush="Gray" BorderThickness="1" >
+        <Grid>
+            <TextBlock Foreground="Wheat" Margin="10,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Character Name:</TextBlock>
+            <TextBox x:Name="textCharacterName" Height="23" Margin="129,50,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button x:Name="buttonOK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,80,48" Click="buttonOK_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Add Character" IsDefault="True">
+                <Border CornerRadius="3" Height="20"  Width="50" Background="DimGray">
+                    <TextBlock Text="OK" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                </Border>
+            </Button>
+            <Button x:Name="buttonCancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Margin="0,0,10,48" Click="buttonCancel_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Delete Character">
+                <Border Height="20" Width="50" Background="DimGray" CornerRadius="3">
+                    <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                </Border>
+            </Button>
+        </Grid>
+    </Border>
+
+</Window>

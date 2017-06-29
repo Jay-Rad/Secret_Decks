@@ -12,9 +12,14 @@
     </Window.DataContext>
     <Border x:Name="borderMain" Background="#BF000000" CornerRadius="20" >
         <Grid>
-            <Button x:Name="buttonClose" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,10,10,0" Click="buttonClose_Click" Style="{DynamicResource TransparentButtonStyle}">
+            <Button x:Name="buttonClose" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,10,10,0" Click="buttonClose_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Close">
                 <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
                     <TextBlock Text="X" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                </Border>
+            </Button>
+            <Button x:Name="buttonMinimize" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,10,40,0" Click="buttonMinimize_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Minimize">
+                <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
+                    <TextBlock Text="_" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" Height="28"/>
                 </Border>
             </Button>
             <Button x:Name="buttonOptions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="25" Cursor="Hand" Style="{DynamicResource TransparentButtonStyle}" Margin="10,10,0,0" Click="buttonOptions_Click">
@@ -22,6 +27,7 @@
                 <Button.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="menuCharacter" Header="Show Character Selection" Click="menuCharacter_Click" IsCheckable="True" IsChecked="True"></MenuItem>
+                        <MenuItem x:Name="menuSlashOptions" Header="Slash Command Options" Click="menuSlashOptions_Click"></MenuItem>
                         <MenuItem x:Name="menuHelp" Header="Help" Click="menuHelp_Click"></MenuItem>
                         <MenuItem x:Name="menuAbout" Header="About" Click="menuAbout_Click"></MenuItem>
                     </ContextMenu>
@@ -30,7 +36,7 @@
             <StackPanel Margin="0,40,0,10">
                 <Grid x:Name="gridCharacter">
                     <TextBlock Text="Character:"  HorizontalAlignment="Left" FontSize="15" Margin="10,10,0,0" Foreground="Wheat" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="comboCharacters" Margin="120,10,10,0" VerticalAlignment="Top" Background="#FF323232" IsEditable="True" ItemsSource="{Binding Current.Characters}" SelectedItem="{Binding Current.SelectedCharacter, Mode=TwoWay}" SelectionChanged="comboCharacters_SelectionChanged" />
+                    <ComboBox x:Name="comboCharacters" Margin="120,10,10,0" VerticalAlignment="Top" Background="#FF323232" ItemsSource="{Binding Current.Characters}" SelectedItem="{Binding Current.SelectedCharacter, Mode=TwoWay}" SelectionChanged="comboCharacters_SelectionChanged" />
                     <Button x:Name="buttonAddCharacter" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,37,39,0" Click="buttonAddCharacter_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Add a new character.">
                         <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
                             <TextBlock Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
@@ -38,7 +44,7 @@
                     </Button>
                     <Button x:Name="buttonDeleteCharacter" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Margin="0,37,10,0" Click="buttonDeleteCharacter_Click" Style="{DynamicResource TransparentButtonStyle}" ToolTip="Delete the selected character (only from this app).">
                         <Border Height="20" Width="20" Background="DimGray" CornerRadius="20">
-                            <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                            <TextBlock Text="_" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" Height="30"/>
                         </Border>
                     </Button>
                 </Grid>

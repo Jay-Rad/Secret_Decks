@@ -16,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace Secret_Decks
 {
@@ -45,10 +46,25 @@ namespace Secret_Decks
             e.Handled = true;
             var appData = Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Secret_Decks\");
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            File.AppendAllText(appData.FullName + @"\Log.txt", serializer.Serialize(e.Exception) + Environment.NewLine);
+            var ex = e.Exception;
+            while (ex != null)
+            {
+                var entry = new
+                {
+                    Type = "Error",
+                    Timestamp = DateTime.Now,
+                    Message = ex.Message,
+                    Stack = ex.StackTrace,
+                    Source = ex.Source
+                };
+                File.AppendAllText(appData.FullName + @"\Log.txt", serializer.Serialize(entry) + Environment.NewLine);
+                ex = ex.InnerException;
+            }
+            
             MessageBox.Show("An error has occurred and has been written to the log in %appdata%\\Secret_Decks\\Log.txt", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        // *** Window Events *** //
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             comboCharacters.Items.Refresh();
@@ -72,29 +88,71 @@ namespace Secret_Decks
         {
             this.DragMove();
         }
+
+
+        // *** Title Bar Buttons *** //
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        private void buttonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            var win = new Minimized();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+        private void buttonOptions_Click(object sender, RoutedEventArgs e)
+        {
+            buttonOptions.ContextMenu.IsOpen = !buttonOptions.ContextMenu.IsOpen;
+        }
 
+        private void menuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new About();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+        private void menuHelp_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new Help();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+        private void menuCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            if (menuCharacter.IsChecked)
+            {
+                gridCharacter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                gridCharacter.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void menuSlashOptions_Click(object sender, RoutedEventArgs e)
+        {
+            var proc = System.Diagnostics.Process.GetProcesses().ToList().Find(process => process.MainWindowTitle == "Secret World Legends");
+            if (proc == null)
+            {
+                MessageBox.Show("Secret Worlds Legends doesn't appear to be running.", "SWL Not Running", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            var win=  new SlashCommands();
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+        // *** Character Events *** //
         private async void buttonAddCharacter_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(comboCharacters.Text))
-            {
-                MessageBox.Show("You must enter a character name above.", "Name Required", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (Settings.Current.Characters.Exists(character=>character.Name == comboCharacters.Text))
-            {
-                MessageBox.Show("A character with that name already exists.", "Name Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            var newChar = new Models.Character() { Name = comboCharacters.Text };
-            Settings.Current.Characters.Add(newChar);
-            Settings.Current.SelectedCharacter = newChar;
+            var win = new NewCharacter();
+            win.Owner = this;
+            win.ShowDialog();
             comboCharacters.Items.Refresh();
-            Settings.Current.Save();
             var tooltip = new ToolTip() { Content = "Character created." };
             tooltip.PlacementTarget = comboCharacters;
             tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Center;
@@ -120,6 +178,9 @@ namespace Secret_Decks
         {
             listDecks.Items.Refresh();
         }
+
+
+        // *** Deck Events *** //
 
         private void buttonAddDeck_Click(object sender, RoutedEventArgs e)
         {
@@ -196,35 +257,6 @@ namespace Secret_Decks
             Settings.Current.Save();
         }
 
-        private void buttonOptions_Click(object sender, RoutedEventArgs e)
-        {
-            buttonOptions.ContextMenu.IsOpen = !buttonOptions.ContextMenu.IsOpen;
-        }
-
-        private void menuAbout_Click(object sender, RoutedEventArgs e)
-        {
-            var win = new About();
-            win.Owner = this;
-            win.ShowDialog();
-        }
-
-        private void menuHelp_Click(object sender, RoutedEventArgs e)
-        {
-            var win = new Help();
-            win.Owner = this;
-            win.ShowDialog();
-        }
-
-        private void menuCharacter_Click(object sender, RoutedEventArgs e)
-        {
-            if (menuCharacter.IsChecked)
-            {
-                gridCharacter.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                gridCharacter.Visibility = Visibility.Collapsed;
-            }
-        }
+        
     }
 }
