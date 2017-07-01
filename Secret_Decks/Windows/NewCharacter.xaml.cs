@@ -42,7 +42,7 @@ namespace Secret_Decks.Windows
                 System.Windows.MessageBox.Show("A character name is required.", "Name Required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (Settings.Current.SelectedCharacter.Decks.Exists(deck => deck.Name == textCharacterName.Text))
+            if (Settings.Current?.SelectedCharacter?.Decks?.Exists(deck => deck?.Name == textCharacterName?.Text) == true)
             {
                 System.Windows.MessageBox.Show("A character with that name already exists.", "Already Exists", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
